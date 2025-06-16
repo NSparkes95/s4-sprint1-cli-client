@@ -20,7 +20,10 @@ public class Main {
 
             switch (choice) {
                 case "1":
-                    System.out.println("Fetching airports by city...");
+                    System.out.print("Enter city name: ");
+                    String city = scanner.nextLine();
+                    String result = ApiService.getAirportsByCity(city);
+                    System.out.println("Result:\n" + result);
                     break;
                 case "2":
                     System.out.println("Fetching aircraft per passenger...");
