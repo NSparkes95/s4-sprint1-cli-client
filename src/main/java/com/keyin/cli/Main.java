@@ -38,7 +38,10 @@ public class Main {
                     System.out.println("Result:\n" + result3);
                     break;
                 case "4":
-                    System.out.println("Fetching airports per passenger...");
+                    System.out.print("Enter passenger name: ");
+                    String passenger4 = scanner.nextLine();
+                    String result4 = ApiService.getAirportsPerPassenger(passenger4);
+                    System.out.println("Result:\n" + result4);
                     break;
                 case "5":
                     exit = true;

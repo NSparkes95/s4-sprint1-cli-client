@@ -49,6 +49,25 @@ public class ApiService {
           "arrivals": ["YYZ", "YUL"]
         }
         """;
-}
+    }
+
+    public static String getAirportsPerPassenger(String passengerName) {
+        return """
+            {
+            "passenger": "Jane Doe",
+            "airports": [
+                {
+                "name": "St. John's International Airport",
+                "code": "YYT"
+                },
+                {
+                "name": "Toronto Pearson International Airport",
+                "code": "YYZ"
+                }
+            ]
+            }
+            """;
+    }
+
 
 }
