@@ -32,7 +32,10 @@ public class Main {
                     System.out.println("Result:\n" + result2);
                     break;
                 case "3":
-                    System.out.println("Fetching airports per aircraft...");
+                    System.out.print("Enter aircraft registration code: ");
+                    String aircraftCode = scanner.nextLine();
+                    String result3 = ApiService.getAirportsPerAircraft(aircraftCode);
+                    System.out.println("Result:\n" + result3);
                     break;
                 case "4":
                     System.out.println("Fetching airports per passenger...");

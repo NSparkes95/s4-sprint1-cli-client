@@ -40,4 +40,15 @@ public class ApiService {
             ]
             """;
     }
+
+    public static String getAirportsPerAircraft(String aircraftCode) {
+    return """
+        {
+          "aircraft": "C-GJKL",
+          "departures": ["YYT", "YHZ"],
+          "arrivals": ["YYZ", "YUL"]
+        }
+        """;
+}
+
 }
