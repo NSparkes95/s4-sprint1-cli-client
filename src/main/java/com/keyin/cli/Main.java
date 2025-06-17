@@ -3,6 +3,8 @@ package com.keyin.cli;
 import java.util.Scanner;
 
 public class Main {
+    private static final ApiService apiService = new ApiService();
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean exit = false;
@@ -22,26 +24,22 @@ public class Main {
                 case "1":
                     System.out.print("Enter city name: ");
                     String city = scanner.nextLine();
-                    String result = ApiService.getAirportsByCity(city);
-                    System.out.println("Result:\n" + result);
+                    System.out.println("Result:\n" + apiService.getAirportsByCity(city));
                     break;
                 case "2":
                     System.out.print("Enter passenger name: ");
-                    String passengerName = scanner.nextLine();
-                    String result2 = ApiService.getAircraftPerPassenger(passengerName);
-                    System.out.println("Result:\n" + result2);
+                    String passenger = scanner.nextLine();
+                    System.out.println("Result:\n" + apiService.getAircraftPerPassenger(passenger));
                     break;
                 case "3":
-                    System.out.print("Enter aircraft registration code: ");
-                    String aircraftCode = scanner.nextLine();
-                    String result3 = ApiService.getAirportsPerAircraft(aircraftCode);
-                    System.out.println("Result:\n" + result3);
+                    System.out.print("Enter aircraft code: ");
+                    String aircraft = scanner.nextLine();
+                    System.out.println("Result:\n" + apiService.getAirportsPerAircraft(aircraft));
                     break;
                 case "4":
                     System.out.print("Enter passenger name: ");
-                    String passenger4 = scanner.nextLine();
-                    String result4 = ApiService.getAirportsPerPassenger(passenger4);
-                    System.out.println("Result:\n" + result4);
+                    String pName = scanner.nextLine();
+                    System.out.println("Result:\n" + apiService.getAirportsPerPassenger(pName));
                     break;
                 case "5":
                     exit = true;

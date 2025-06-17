@@ -2,22 +2,30 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.keyin</groupId>
     <artifactId>s4-sprint1-cli-client</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.release>17</maven.compiler.release>
     </properties>
 
     <dependencies>
+        <!-- OkHttp for HTTP requests -->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
             <version>4.12.0</version>
+        </dependency>
+
+        <!-- JUnit 5 for testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.0</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -33,4 +41,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
