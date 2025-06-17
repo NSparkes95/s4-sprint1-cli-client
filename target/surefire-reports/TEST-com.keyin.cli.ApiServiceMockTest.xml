@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.keyin.cli.MainTest" time="0.006" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.keyin.cli.ApiServiceMockTest" time="0.698" tests="1" errors="1" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="23"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -58,5 +58,80 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="67.0"/>
   </properties>
-  <testcase name="testMenuOption1DisplaysAirportResults" classname="com.keyin.cli.MainTest" time="0.005"/>
+  <testcase name="testMockedAirportByCity" classname="com.keyin.cli.ApiServiceMockTest" time="0.676">
+    <error message="&#10;Mockito cannot mock this class: class com.keyin.cli.ApiService.&#10;&#10;If you&apos;re not sure why you&apos;re getting this error, please open an issue on GitHub.&#10;&#10;&#10;Java               : 23&#10;JVM vendor name    : Oracle Corporation&#10;JVM vendor version : 23.0.2+7-58&#10;JVM name           : Java HotSpot(TM) 64-Bit Server VM&#10;JVM version        : 23.0.2+7-58&#10;JVM info           : mixed mode, sharing&#10;OS name            : Windows 11&#10;OS version         : 10.0&#10;&#10;&#10;You are seeing this disclaimer because Mockito is configured to create inlined mocks.&#10;You can learn about inline mocks and their limitations under item #39 of the Mockito class javadoc.&#10;&#10;Underlying exception : org.mockito.exceptions.base.MockitoException: Could not modify all classes [class java.lang.Object, class com.keyin.cli.ApiService]" type="org.mockito.exceptions.base.MockitoException"><![CDATA[org.mockito.exceptions.base.MockitoException: 
+
+Mockito cannot mock this class: class com.keyin.cli.ApiService.
+
+If you're not sure why you're getting this error, please open an issue on GitHub.
+
+
+Java               : 23
+JVM vendor name    : Oracle Corporation
+JVM vendor version : 23.0.2+7-58
+JVM name           : Java HotSpot(TM) 64-Bit Server VM
+JVM version        : 23.0.2+7-58
+JVM info           : mixed mode, sharing
+OS name            : Windows 11
+OS version         : 10.0
+
+
+You are seeing this disclaimer because Mockito is configured to create inlined mocks.
+You can learn about inline mocks and their limitations under item #39 of the Mockito class javadoc.
+
+Underlying exception : org.mockito.exceptions.base.MockitoException: Could not modify all classes [class java.lang.Object, class com.keyin.cli.ApiService]
+	at com.keyin.cli.ApiServiceMockTest.testMockedAirportByCity(ApiServiceMockTest.java:13)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+Caused by: org.mockito.exceptions.base.MockitoException: Could not modify all classes [class java.lang.Object, class com.keyin.cli.ApiService]
+	at net.bytebuddy.TypeCache.findOrInsert(TypeCache.java:168)
+	at net.bytebuddy.TypeCache$WithInlineExpunction.findOrInsert(TypeCache.java:399)
+	at net.bytebuddy.TypeCache.findOrInsert(TypeCache.java:190)
+	at net.bytebuddy.TypeCache$WithInlineExpunction.findOrInsert(TypeCache.java:410)
+	... 4 more
+Caused by: java.lang.IllegalStateException: 
+Byte Buddy could not instrument all classes within the mock's type hierarchy
+
+This problem should never occur for javac-compiled classes. This problem has been observed for classes that are:
+ - Compiled by older versions of scalac
+ - Classes that are part of the Android distribution
+	at org.mockito.internal.creation.bytebuddy.InlineBytecodeGenerator.triggerRetransformation(InlineBytecodeGenerator.java:285)
+	at org.mockito.internal.creation.bytebuddy.InlineBytecodeGenerator.mockClass(InlineBytecodeGenerator.java:218)
+	at org.mockito.internal.creation.bytebuddy.TypeCachingBytecodeGenerator.lambda$mockClass$0(TypeCachingBytecodeGenerator.java:78)
+	at net.bytebuddy.TypeCache.findOrInsert(TypeCache.java:168)
+	at net.bytebuddy.TypeCache$WithInlineExpunction.findOrInsert(TypeCache.java:399)
+	at net.bytebuddy.TypeCache.findOrInsert(TypeCache.java:190)
+	at net.bytebuddy.TypeCache$WithInlineExpunction.findOrInsert(TypeCache.java:410)
+	at org.mockito.internal.creation.bytebuddy.TypeCachingBytecodeGenerator.mockClass(TypeCachingBytecodeGenerator.java:75)
+	at org.mockito.internal.creation.bytebuddy.InlineDelegateByteBuddyMockMaker.createMockType(InlineDelegateByteBuddyMockMaker.java:414)
+	at org.mockito.internal.creation.bytebuddy.InlineDelegateByteBuddyMockMaker.doCreateMock(InlineDelegateByteBuddyMockMaker.java:373)
+	at org.mockito.internal.creation.bytebuddy.InlineDelegateByteBuddyMockMaker.createMock(InlineDelegateByteBuddyMockMaker.java:352)
+	at org.mockito.internal.creation.bytebuddy.InlineByteBuddyMockMaker.createMock(InlineByteBuddyMockMaker.java:56)
+	at org.mockito.internal.util.MockUtil.createMock(MockUtil.java:99)
+	at org.mockito.internal.MockitoCore.mock(MockitoCore.java:84)
+	at org.mockito.Mockito.mock(Mockito.java:2104)
+	at org.mockito.Mockito.mock(Mockito.java:2019)
+	... 4 more
+Caused by: java.lang.IllegalArgumentException: Java 23 (67) is not supported by the current version of Byte Buddy which officially supports Java 22 (66) - update Byte Buddy or set net.bytebuddy.experimental as a VM property
+	at net.bytebuddy.utility.OpenedClassReader.of(OpenedClassReader.java:100)
+	at net.bytebuddy.dynamic.scaffold.TypeWriter$Default$ForInlining.create(TypeWriter.java:4011)
+	at net.bytebuddy.dynamic.scaffold.TypeWriter$Default.make(TypeWriter.java:2224)
+	at net.bytebuddy.dynamic.DynamicType$Builder$AbstractBase$UsingTypeWriter.make(DynamicType.java:4055)
+	at net.bytebuddy.dynamic.DynamicType$Builder$AbstractBase.make(DynamicType.java:3739)
+	at org.mockito.internal.creation.bytebuddy.InlineBytecodeGenerator.transform(InlineBytecodeGenerator.java:402)
+	at java.instrument/java.lang.instrument.ClassFileTransformer.transform(ClassFileTransformer.java:242)
+	at java.instrument/sun.instrument.TransformerManager.transform(TransformerManager.java:188)
+	at java.instrument/sun.instrument.InstrumentationImpl.transform(InstrumentationImpl.java:610)
+	at java.instrument/sun.instrument.InstrumentationImpl.retransformClasses0(Native Method)
+	at java.instrument/sun.instrument.InstrumentationImpl.retransformClasses(InstrumentationImpl.java:225)
+	at org.mockito.internal.creation.bytebuddy.InlineBytecodeGenerator.triggerRetransformation(InlineBytecodeGenerator.java:281)
+	... 19 more
+]]></error>
+    <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\chris\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.12\byte-buddy-agent-1.14.12.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+  </testcase>
 </testsuite>
