@@ -88,7 +88,8 @@ public class MainTest {
         Main.main(new String[]{});
         String output = outputStream.toString();
 
-        assertTrue(output.contains("Invalid option"));
-        assertTrue(output.contains("Goodbye"));
+        assertTrue(output.contains("Invalid input. Try again."));
+        assertTrue(output.contains("Exiting CLI."));
     }
+
 }
