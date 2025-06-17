@@ -39,4 +39,41 @@ public class ApiServiceTest {
         assertTrue(result.contains("passenger"));
         assertTrue(result.contains("airports"));
     }
+
+    // Added Additional test coverage below
+
+    @Test
+    public void testGetAirportsByCity_withEmptyInput() {
+        String result = apiService.getAirportsByCity("");
+        assertNotNull(result);
+        assertFalse(result.isEmpty(), "Response should not be empty even with empty input.");
+    }
+
+    @Test
+    public void testGetAirportsByCity_withNullInput() {
+        String result = apiService.getAirportsByCity(null);
+        assertNotNull(result);
+        assertFalse(result.isEmpty(), "Response should not be empty even with null input.");
+    }
+
+    @Test
+    public void testGetAircraftPerPassenger_withNonsenseInput() {
+        String result = apiService.getAircraftPerPassenger("!@#$%^");
+        assertNotNull(result);
+        assertTrue(result.contains("aircraft") || result.contains("model"));
+    }
+
+    @Test
+    public void testGetAirportsPerAircraft_withEmptyInput() {
+        String result = apiService.getAirportsPerAircraft("");
+        assertNotNull(result);
+        assertTrue(result.contains("departures") || result.contains("arrivals"));
+    }
+
+    @Test
+    public void testGetAirportsPerPassenger_withNullInput() {
+        String result = apiService.getAirportsPerPassenger(null);
+        assertNotNull(result);
+        assertTrue(result.contains("passenger") || result.contains("airports"));
+    }
 }
