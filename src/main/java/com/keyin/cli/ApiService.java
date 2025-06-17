@@ -2,7 +2,7 @@ package com.keyin.cli;
 
 public class ApiService {
 
-    public static String getAirportsByCity(String city) {
+    public String getAirportsByCity(String city) {
         return """
             [
               {
@@ -21,7 +21,7 @@ public class ApiService {
             """;
     }
 
-    public static String getAircraftPerPassenger(String passengerName) {
+    public String getAircraftPerPassenger(String passengerName) {
         return """
             [
               {
@@ -41,17 +41,17 @@ public class ApiService {
             """;
     }
 
-    public static String getAirportsPerAircraft(String aircraftCode) {
-    return """
-        {
-          "aircraft": "C-GJKL",
-          "departures": ["YYT", "YHZ"],
-          "arrivals": ["YYZ", "YUL"]
-        }
-        """;
+    public String getAirportsPerAircraft(String aircraftCode) {
+        return """
+            {
+              "aircraft": "C-GJKL",
+              "departures": ["YYT", "YHZ"],
+              "arrivals": ["YYZ", "YUL"]
+            }
+            """;
     }
 
-    public static String getAirportsPerPassenger(String passengerName) {
+    public String getAirportsPerPassenger(String passengerName) {
         return """
             {
             "passenger": "Jane Doe",
@@ -68,6 +68,4 @@ public class ApiService {
             }
             """;
     }
-
-
-}
+} 
