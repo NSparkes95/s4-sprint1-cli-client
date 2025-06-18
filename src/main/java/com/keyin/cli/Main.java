@@ -15,33 +15,53 @@ public class Main {
             System.out.println("2. Aircraft per passenger");
             System.out.println("3. Airports per aircraft");
             System.out.println("4. Airports per passenger");
-            System.out.println("5. Exit");
+            System.out.println("5. List all cities");
+            System.out.println("6. List all passengers");
+            System.out.println("7. List all aircraft");
+            System.out.println("8. Exit");
             System.out.print("Enter your choice: ");
 
             String choice = scanner.nextLine();
 
             switch (choice) {
                 case "1":
-                    System.out.print("Enter city name: ");
-                    String city = scanner.nextLine();
-                    System.out.println("Result:\n" + apiService.getAirportsByCity(city));
+                    System.out.println("\nAvailable cities:");
+                    System.out.println(apiService.listAllCities());
+                    System.out.print("Enter city ID: ");
+                    String cityId = scanner.nextLine();
+                    System.out.println("Result:\n" + apiService.getAirportsByCity(cityId));
                     break;
                 case "2":
-                    System.out.print("Enter passenger name: ");
-                    String passenger = scanner.nextLine();
-                    System.out.println("Result:\n" + apiService.getAircraftPerPassenger(passenger));
+                    System.out.println("\nAvailable passengers:");
+                    System.out.println(apiService.listAllPassengers());
+                    System.out.print("Enter passenger ID: ");
+                    String passengerId = scanner.nextLine();
+                    System.out.println("Result:\n" + apiService.getAircraftPerPassenger(passengerId));
                     break;
                 case "3":
-                    System.out.print("Enter aircraft code: ");
-                    String aircraft = scanner.nextLine();
-                    System.out.println("Result:\n" + apiService.getAirportsPerAircraft(aircraft));
+                    System.out.println("\nAvailable aircraft:");
+                    System.out.println(apiService.listAllAircraft());
+                    System.out.print("Enter aircraft ID: ");
+                    String aircraftId = scanner.nextLine();
+                    System.out.println("Result:\n" + apiService.getAirportsPerAircraft(aircraftId));
                     break;
                 case "4":
-                    System.out.print("Enter passenger name: ");
-                    String pName = scanner.nextLine();
-                    System.out.println("Result:\n" + apiService.getAirportsPerPassenger(pName));
+                    System.out.println("\nAvailable passengers:");
+                    System.out.println(apiService.listAllPassengers());
+                    System.out.print("Enter passenger ID: ");
+                    String pId = scanner.nextLine();
+                    System.out.println("Result:\n" + apiService.getAirportsPerPassenger(pId));
                     break;
                 case "5":
+                    System.out.println("\n" + apiService.listAllCities());
+                    break;
+                case "6":
+                    System.out.println("\n" + apiService.listAllPassengers());
+                    break;
+                case "7":
+                    System.out.println("\n" + apiService.listAllAircraft());
+                    break;
+                case "8":
                     exit = true;
                     break;
                 default:

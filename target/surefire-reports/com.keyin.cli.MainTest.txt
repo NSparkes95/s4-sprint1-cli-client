@@ -1,0 +1,49 @@
+-------------------------------------------------------------------------------
+Test set: com.keyin.cli.MainTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 5, Skipped: 0, Time elapsed: 0.344 s <<< FAILURE! -- in com.keyin.cli.MainTest
+com.keyin.cli.MainTest.testMenuOption1DisplaysAirportResults -- Time elapsed: 0.180 s <<< ERROR!
+java.util.NoSuchElementException: No line found
+	at java.base/java.util.Scanner.nextLine(Scanner.java:1677)
+	at com.keyin.cli.Main.main(Main.java:24)
+	at com.keyin.cli.MainTest.testMenuOption1DisplaysAirportResults(MainTest.java:24)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+
+com.keyin.cli.MainTest.testInvalidOptionThenExit -- Time elapsed: 0.014 s <<< ERROR!
+java.util.NoSuchElementException: No line found
+	at java.base/java.util.Scanner.nextLine(Scanner.java:1677)
+	at com.keyin.cli.Main.main(Main.java:24)
+	at com.keyin.cli.MainTest.testInvalidOptionThenExit(MainTest.java:88)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+
+com.keyin.cli.MainTest.testMenuOption4DisplaysAirportsPerPassenger -- Time elapsed: 0.060 s <<< ERROR!
+java.util.NoSuchElementException: No line found
+	at java.base/java.util.Scanner.nextLine(Scanner.java:1677)
+	at com.keyin.cli.Main.main(Main.java:24)
+	at com.keyin.cli.MainTest.testMenuOption4DisplaysAirportsPerPassenger(MainTest.java:73)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+
+com.keyin.cli.MainTest.testMenuOption3DisplaysAirportPerAircraftResults -- Time elapsed: 0.033 s <<< ERROR!
+java.util.NoSuchElementException: No line found
+	at java.base/java.util.Scanner.nextLine(Scanner.java:1677)
+	at com.keyin.cli.Main.main(Main.java:24)
+	at com.keyin.cli.MainTest.testMenuOption3DisplaysAirportPerAircraftResults(MainTest.java:58)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+
+com.keyin.cli.MainTest.testMenuOption2DisplaysAircraftResults -- Time elapsed: 0.052 s <<< ERROR!
+java.util.NoSuchElementException: No line found
+	at java.base/java.util.Scanner.nextLine(Scanner.java:1677)
+	at com.keyin.cli.Main.main(Main.java:24)
+	at com.keyin.cli.MainTest.testMenuOption2DisplaysAircraftResults(MainTest.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+
