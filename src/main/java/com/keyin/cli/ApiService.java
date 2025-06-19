@@ -5,6 +5,8 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.keyin.cli.model.Airport;
@@ -133,9 +135,11 @@ public class ApiService {
         }
     }
 
-    public String getAirportsByCity(String cityId) {
+        public String getAirportsByCity(String cityId) {
         try {
-            String rawJson = getJsonFromUrl("/city/" + cityId + "/airports");
+            String encodedCityId = URLEncoder.encode(cityId, StandardCharsets.UTF_8);
+
+            String rawJson = getJsonFromUrl("/city/" + encodedCityId + "/airports");
 
             if (rawJson.startsWith("Error:")) {
                 return rawJson;

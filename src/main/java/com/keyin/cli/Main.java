@@ -21,6 +21,7 @@ public class Main {
             System.out.println("8. Exit");
             System.out.print("Enter your choice: ");
 
+            if (!scanner.hasNextLine()) break;
             String choice = scanner.nextLine();
 
             switch (choice) {
@@ -28,6 +29,7 @@ public class Main {
                     System.out.println("\n> Airports by City");
                     System.out.println("Tip: Not sure of the city ID? Type 'menu' and select Option 5 to view all cities.");
                     System.out.print("Enter city ID or type 'menu': ");
+                    if (!scanner.hasNextLine()) break;
                     String cityId = scanner.nextLine();
                     if (cityId.equalsIgnoreCase("menu")) break;
                     System.out.println("Result:\n" + apiService.getAirportsByCity(cityId));
@@ -37,6 +39,7 @@ public class Main {
                     System.out.println("\n> Aircraft per Passenger");
                     System.out.println("Tip: Not sure of the passenger ID? Type 'menu' and select Option 6 to view all passengers.");
                     System.out.print("Enter passenger ID or type 'menu': ");
+                    if (!scanner.hasNextLine()) break;
                     String passengerId = scanner.nextLine();
                     if (passengerId.equalsIgnoreCase("menu")) break;
                     System.out.println("Result:\n" + apiService.getAircraftPerPassenger(passengerId));
@@ -46,6 +49,7 @@ public class Main {
                     System.out.println("\n> Airports per Aircraft");
                     System.out.println("Tip: Not sure of the aircraft ID? Type 'menu' and select Option 7 to view all aircraft.");
                     System.out.print("Enter aircraft ID or type 'menu': ");
+                    if (!scanner.hasNextLine()) break;
                     String aircraftId = scanner.nextLine();
                     if (aircraftId.equalsIgnoreCase("menu")) break;
                     System.out.println("Result:\n" + apiService.getAirportsPerAircraft(aircraftId));
@@ -55,6 +59,7 @@ public class Main {
                     System.out.println("\n> Airports per Passenger");
                     System.out.println("Tip: Not sure of the passenger ID? Type 'menu' and select Option 6 to view all passengers.");
                     System.out.print("Enter passenger ID or type 'menu': ");
+                    if (!scanner.hasNextLine()) break;
                     String pId = scanner.nextLine();
                     if (pId.equalsIgnoreCase("menu")) break;
                     System.out.println("Result:\n" + apiService.getAirportsPerPassenger(pId));
