@@ -23,7 +23,9 @@ public class ApiService {
             conn.setRequestMethod("GET");
 
             int responseCode = conn.getResponseCode();
-            if (responseCode != 200) {
+            if (responseCode == 404) {
+                return "Error: Resource not found (404) for " + endpoint;
+            } else if (responseCode >= 400) {
                 return "Error: HTTP " + responseCode + " returned from " + endpoint;
             }
 
@@ -39,7 +41,9 @@ public class ApiService {
             conn.disconnect();
             return json.toString();
         } catch (IOException e) {
-            return "Error while connecting to API: " + e.getMessage();
+            return "Error: Unable to connect to server. " + e.getMessage();
+        } catch (Exception e) {
+            return "Error: Unexpected failure. " + e.getMessage();
         }
     }
 
@@ -157,80 +161,78 @@ public class ApiService {
     }
 
     public String getAircraftPerPassenger(String passengerId) {
-    try {
-        String rawJson = getJsonFromUrl("/passenger/" + passengerId + "/aircraft");
+        try {
+            String rawJson = getJsonFromUrl("/passenger/" + passengerId + "/aircraft");
 
-        if (rawJson.startsWith("Error:")) return rawJson;
+            if (rawJson.startsWith("Error:")) return rawJson;
 
-        ObjectMapper mapper = new ObjectMapper();
-        Aircraft[] aircraftList = mapper.readValue(rawJson, Aircraft[].class);
+            ObjectMapper mapper = new ObjectMapper();
+            Aircraft[] aircraftList = mapper.readValue(rawJson, Aircraft[].class);
 
-        if (aircraftList.length == 0) return "No aircraft found for passenger ID " + passengerId;
+            if (aircraftList.length == 0) return "No aircraft found for passenger ID " + passengerId;
 
-        StringBuilder result = new StringBuilder("Aircraft flown:\n");
-        for (Aircraft a : aircraftList) {
-            result.append("- ").append(a.getType())
-                  .append(" (").append(a.getAirlineName()).append(")")
-                  .append(" with ").append(a.getNumberOfPassengers()).append(" passengers\n");
+            StringBuilder result = new StringBuilder("Aircraft flown:\n");
+            for (Aircraft a : aircraftList) {
+                result.append("- ").append(a.getType())
+                      .append(" (").append(a.getAirlineName()).append(")")
+                      .append(" with ").append(a.getNumberOfPassengers()).append(" passengers\n");
+            }
+
+            return result.toString();
+        } catch (Exception e) {
+            return "Error: " + e.getMessage();
         }
-
-        return result.toString();
-    } catch (Exception e) {
-        return "Error: " + e.getMessage();
     }
-}
-
 
     public String getAirportsPerAircraft(String aircraftId) {
-    try {
-        String rawJson = getJsonFromUrl("/aircraft/" + aircraftId + "/airports");
+        try {
+            String rawJson = getJsonFromUrl("/aircraft/" + aircraftId + "/airports");
 
-        if (rawJson.startsWith("Error:")) return rawJson;
+            if (rawJson.startsWith("Error:")) return rawJson;
 
-        ObjectMapper mapper = new ObjectMapper();
-        Airport[] airports = mapper.readValue(rawJson, Airport[].class);
+            ObjectMapper mapper = new ObjectMapper();
+            Airport[] airports = mapper.readValue(rawJson, Airport[].class);
 
-        if (airports.length == 0) return "No airports found for aircraft ID " + aircraftId;
+            if (airports.length == 0) return "No airports found for aircraft ID " + aircraftId;
 
-        StringBuilder result = new StringBuilder("Airports used:\n");
-        for (Airport a : airports) {
-            result.append("- ").append(a.getName()).append(" (").append(a.getCode()).append(")\n");
+            StringBuilder result = new StringBuilder("Airports used:\n");
+            for (Airport a : airports) {
+                result.append("- ").append(a.getName()).append(" (").append(a.getCode()).append(")\n");
+            }
+
+            return result.toString();
+        } catch (Exception e) {
+            return "Error: " + e.getMessage();
         }
-
-        return result.toString();
-    } catch (Exception e) {
-        return "Error: " + e.getMessage();
     }
-}
-
 
     public String getAirportsPerPassenger(String passengerId) {
-    try {
-        String rawJson = getJsonFromUrl("/passenger/" + passengerId + "/airports");
+        try {
+            String rawJson = getJsonFromUrl("/passenger/" + passengerId + "/airports");
 
-        if (rawJson.startsWith("Error:")) {
-            return rawJson;
+            if (rawJson.startsWith("Error:")) {
+                return rawJson;
+            }
+
+            ObjectMapper mapper = new ObjectMapper();
+            Airport[] airports = mapper.readValue(rawJson, Airport[].class);
+
+            if (airports.length == 0) {
+                return "No airports found for passenger ID " + passengerId + ".";
+            }
+
+            StringBuilder result = new StringBuilder("Airports used by passenger ID " + passengerId + ":\n");
+            for (Airport a : airports) {
+                result.append("- ").append(a.toString()).append("\n");
+            }
+
+            return result.toString();
+        } catch (Exception e) {
+            return "Error: " + e.getMessage();
         }
-
-        ObjectMapper mapper = new ObjectMapper();
-        Airport[] airports = mapper.readValue(rawJson, Airport[].class);
-
-        if (airports.length == 0) {
-            return "No airports found for passenger ID " + passengerId + ".";
-        }
-
-        StringBuilder result = new StringBuilder("Airports used by passenger ID " + passengerId + ":\n");
-        for (Airport a : airports) {
-            result.append("- ").append(a.toString()).append("\n");
-        }
-
-        return result.toString();
-    } catch (Exception e) {
-        return "Error: " + e.getMessage();
     }
-}
 
-      public String getAllPassengers() {
+    public String getAllPassengers() {
         try {
             String rawJson = getJsonFromUrl("/passengers");
 
@@ -258,5 +260,4 @@ public class ApiService {
             return "Error: " + e.getMessage();
         }
     }
-
 }
