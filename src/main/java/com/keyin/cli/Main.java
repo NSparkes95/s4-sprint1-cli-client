@@ -25,45 +25,60 @@ public class Main {
 
             switch (choice) {
                 case "1":
-                    System.out.println("\nAvailable cities:");
-                    System.out.println(apiService.listAllCities());
-                    System.out.print("Enter city ID: ");
+                    System.out.println("\n> Airports by City");
+                    System.out.println("Tip: Not sure of the city ID? Type 'menu' and select Option 5 to view all cities.");
+                    System.out.print("Enter city ID or type 'menu': ");
                     String cityId = scanner.nextLine();
+                    if (cityId.equalsIgnoreCase("menu")) break;
                     System.out.println("Result:\n" + apiService.getAirportsByCity(cityId));
                     break;
+
                 case "2":
-                    System.out.println("\nAvailable passengers:");
-                    System.out.println(apiService.listAllPassengers());
-                    System.out.print("Enter passenger ID: ");
+                    System.out.println("\n> Aircraft per Passenger");
+                    System.out.println("Tip: Not sure of the passenger ID? Type 'menu' and select Option 6 to view all passengers.");
+                    System.out.print("Enter passenger ID or type 'menu': ");
                     String passengerId = scanner.nextLine();
+                    if (passengerId.equalsIgnoreCase("menu")) break;
                     System.out.println("Result:\n" + apiService.getAircraftPerPassenger(passengerId));
                     break;
+
                 case "3":
-                    System.out.println("\nAvailable aircraft:");
-                    System.out.println(apiService.listAllAircraft());
-                    System.out.print("Enter aircraft ID: ");
+                    System.out.println("\n> Airports per Aircraft");
+                    System.out.println("Tip: Not sure of the aircraft ID? Type 'menu' and select Option 7 to view all aircraft.");
+                    System.out.print("Enter aircraft ID or type 'menu': ");
                     String aircraftId = scanner.nextLine();
+                    if (aircraftId.equalsIgnoreCase("menu")) break;
                     System.out.println("Result:\n" + apiService.getAirportsPerAircraft(aircraftId));
                     break;
+
                 case "4":
-                    System.out.println("\nAvailable passengers:");
-                    System.out.println(apiService.listAllPassengers());
-                    System.out.print("Enter passenger ID: ");
+                    System.out.println("\n> Airports per Passenger");
+                    System.out.println("Tip: Not sure of the passenger ID? Type 'menu' and select Option 6 to view all passengers.");
+                    System.out.print("Enter passenger ID or type 'menu': ");
                     String pId = scanner.nextLine();
+                    if (pId.equalsIgnoreCase("menu")) break;
                     System.out.println("Result:\n" + apiService.getAirportsPerPassenger(pId));
                     break;
+
                 case "5":
-                    System.out.println("\n" + apiService.listAllCities());
+                    System.out.println("\n> List of All Cities:\n");
+                    System.out.println(apiService.listAllCities());
                     break;
+
                 case "6":
-                    System.out.println("\n" + apiService.listAllPassengers());
+                    System.out.println("\n> List of All Passengers:\n");
+                    System.out.println(apiService.listAllPassengers());
                     break;
+
                 case "7":
-                    System.out.println("\n" + apiService.listAllAircraft());
+                    System.out.println("\n> List of All Aircraft:\n");
+                    System.out.println(apiService.listAllAircraft());
                     break;
+
                 case "8":
                     exit = true;
                     break;
+
                 default:
                     System.out.println("Invalid input. Try again.");
             }
