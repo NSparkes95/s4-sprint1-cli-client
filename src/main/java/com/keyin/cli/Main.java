@@ -22,7 +22,7 @@ public class Main {
             System.out.print("Enter your choice: ");
 
             if (!scanner.hasNextLine()) break;
-            String choice = scanner.nextLine();
+            String choice = scanner.nextLine().trim();
 
             switch (choice) {
                 case "1":
@@ -30,8 +30,12 @@ public class Main {
                     System.out.println("Tip: Not sure of the city ID? Type 'menu' and select Option 5 to view all cities.");
                     System.out.print("Enter city ID or type 'menu': ");
                     if (!scanner.hasNextLine()) break;
-                    String cityId = scanner.nextLine();
+                    String cityId = scanner.nextLine().trim();
                     if (cityId.equalsIgnoreCase("menu")) break;
+                    if (!isValidId(cityId)) {
+                        System.out.println("Invalid input. Please enter a numeric city ID.");
+                        break;
+                    }
                     System.out.println("Result:\n" + apiService.getAirportsByCity(cityId));
                     break;
 
@@ -40,8 +44,12 @@ public class Main {
                     System.out.println("Tip: Not sure of the passenger ID? Type 'menu' and select Option 6 to view all passengers.");
                     System.out.print("Enter passenger ID or type 'menu': ");
                     if (!scanner.hasNextLine()) break;
-                    String passengerId = scanner.nextLine();
+                    String passengerId = scanner.nextLine().trim();
                     if (passengerId.equalsIgnoreCase("menu")) break;
+                    if (!isValidId(passengerId)) {
+                        System.out.println("Invalid input. Please enter a numeric passenger ID.");
+                        break;
+                    }
                     System.out.println("Result:\n" + apiService.getAircraftPerPassenger(passengerId));
                     break;
 
@@ -50,8 +58,12 @@ public class Main {
                     System.out.println("Tip: Not sure of the aircraft ID? Type 'menu' and select Option 7 to view all aircraft.");
                     System.out.print("Enter aircraft ID or type 'menu': ");
                     if (!scanner.hasNextLine()) break;
-                    String aircraftId = scanner.nextLine();
+                    String aircraftId = scanner.nextLine().trim();
                     if (aircraftId.equalsIgnoreCase("menu")) break;
+                    if (!isValidId(aircraftId)) {
+                        System.out.println("Invalid input. Please enter a numeric aircraft ID.");
+                        break;
+                    }
                     System.out.println("Result:\n" + apiService.getAirportsPerAircraft(aircraftId));
                     break;
 
@@ -60,8 +72,12 @@ public class Main {
                     System.out.println("Tip: Not sure of the passenger ID? Type 'menu' and select Option 6 to view all passengers.");
                     System.out.print("Enter passenger ID or type 'menu': ");
                     if (!scanner.hasNextLine()) break;
-                    String pId = scanner.nextLine();
+                    String pId = scanner.nextLine().trim();
                     if (pId.equalsIgnoreCase("menu")) break;
+                    if (!isValidId(pId)) {
+                        System.out.println("Invalid input. Please enter a numeric passenger ID.");
+                        break;
+                    }
                     System.out.println("Result:\n" + apiService.getAirportsPerPassenger(pId));
                     break;
 
@@ -91,5 +107,10 @@ public class Main {
 
         scanner.close();
         System.out.println("Exiting CLI.");
+    }
+
+    // Helper to validate ID input
+    private static boolean isValidId(String input) {
+        return input != null && input.matches("\\d+");
     }
 }

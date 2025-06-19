@@ -15,7 +15,7 @@ public class MainTest {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
 
-        Main.main(new String[]{});  // Run the CLI app
+        Main.main(new String[]{});  
         String result = output.toString();
 
         for (String expected : expectedContents) {
