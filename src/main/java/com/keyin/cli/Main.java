@@ -15,35 +15,91 @@ public class Main {
             System.out.println("2. Aircraft per passenger");
             System.out.println("3. Airports per aircraft");
             System.out.println("4. Airports per passenger");
-            System.out.println("5. Exit");
+            System.out.println("5. List all cities");
+            System.out.println("6. List all passengers");
+            System.out.println("7. List all aircraft");
+            System.out.println("8. Exit");
             System.out.print("Enter your choice: ");
 
-            String choice = scanner.nextLine();
+            if (!scanner.hasNextLine()) break;
+            String choice = scanner.nextLine().trim();
 
             switch (choice) {
                 case "1":
-                    System.out.print("Enter city name: ");
-                    String city = scanner.nextLine();
-                    System.out.println("Result:\n" + apiService.getAirportsByCity(city));
+                    System.out.println("\n> Airports by City");
+                    System.out.println("Tip: Not sure of the city ID? Type 'menu' and select Option 5 to view all cities.");
+                    System.out.print("Enter city ID or type 'menu': ");
+                    if (!scanner.hasNextLine()) break;
+                    String cityId = scanner.nextLine().trim();
+                    if (cityId.equalsIgnoreCase("menu")) break;
+                    if (!isValidId(cityId)) {
+                        System.out.println("Invalid input. Please enter a numeric city ID.");
+                        break;
+                    }
+                    System.out.println("Result:\n" + apiService.getAirportsByCity(cityId));
                     break;
+
                 case "2":
-                    System.out.print("Enter passenger name: ");
-                    String passenger = scanner.nextLine();
-                    System.out.println("Result:\n" + apiService.getAircraftPerPassenger(passenger));
+                    System.out.println("\n> Aircraft per Passenger");
+                    System.out.println("Tip: Not sure of the passenger ID? Type 'menu' and select Option 6 to view all passengers.");
+                    System.out.print("Enter passenger ID or type 'menu': ");
+                    if (!scanner.hasNextLine()) break;
+                    String passengerId = scanner.nextLine().trim();
+                    if (passengerId.equalsIgnoreCase("menu")) break;
+                    if (!isValidId(passengerId)) {
+                        System.out.println("Invalid input. Please enter a numeric passenger ID.");
+                        break;
+                    }
+                    System.out.println("Result:\n" + apiService.getAircraftPerPassenger(passengerId));
                     break;
+
                 case "3":
-                    System.out.print("Enter aircraft code: ");
-                    String aircraft = scanner.nextLine();
-                    System.out.println("Result:\n" + apiService.getAirportsPerAircraft(aircraft));
+                    System.out.println("\n> Airports per Aircraft");
+                    System.out.println("Tip: Not sure of the aircraft ID? Type 'menu' and select Option 7 to view all aircraft.");
+                    System.out.print("Enter aircraft ID or type 'menu': ");
+                    if (!scanner.hasNextLine()) break;
+                    String aircraftId = scanner.nextLine().trim();
+                    if (aircraftId.equalsIgnoreCase("menu")) break;
+                    if (!isValidId(aircraftId)) {
+                        System.out.println("Invalid input. Please enter a numeric aircraft ID.");
+                        break;
+                    }
+                    System.out.println("Result:\n" + apiService.getAirportsPerAircraft(aircraftId));
                     break;
+
                 case "4":
-                    System.out.print("Enter passenger name: ");
-                    String pName = scanner.nextLine();
-                    System.out.println("Result:\n" + apiService.getAirportsPerPassenger(pName));
+                    System.out.println("\n> Airports per Passenger");
+                    System.out.println("Tip: Not sure of the passenger ID? Type 'menu' and select Option 6 to view all passengers.");
+                    System.out.print("Enter passenger ID or type 'menu': ");
+                    if (!scanner.hasNextLine()) break;
+                    String pId = scanner.nextLine().trim();
+                    if (pId.equalsIgnoreCase("menu")) break;
+                    if (!isValidId(pId)) {
+                        System.out.println("Invalid input. Please enter a numeric passenger ID.");
+                        break;
+                    }
+                    System.out.println("Result:\n" + apiService.getAirportsPerPassenger(pId));
                     break;
+
                 case "5":
+                    System.out.println("\n> List of All Cities:\n");
+                    System.out.println(apiService.listAllCities());
+                    break;
+
+                case "6":
+                    System.out.println("\n> List of All Passengers:\n");
+                    System.out.println(apiService.listAllPassengers());
+                    break;
+
+                case "7":
+                    System.out.println("\n> List of All Aircraft:\n");
+                    System.out.println(apiService.listAllAircraft());
+                    break;
+
+                case "8":
                     exit = true;
                     break;
+
                 default:
                     System.out.println("Invalid input. Try again.");
             }
@@ -51,5 +107,10 @@ public class Main {
 
         scanner.close();
         System.out.println("Exiting CLI.");
+    }
+
+    // Helper to validate ID input
+    private static boolean isValidId(String input) {
+        return input != null && input.matches("\\d+");
     }
 }

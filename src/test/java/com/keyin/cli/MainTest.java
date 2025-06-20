@@ -8,88 +8,44 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MainTest {
 
-    @Test
-    public void testMenuOption1DisplaysAirportResults() {
-        // Simulate user input: "1", "St. John's", "5" (to exit)
-        String simulatedInput = "1\nSt. John's\n5\n";
-        InputStream in = new ByteArrayInputStream(simulatedInput.getBytes());
+    private void simulateInputAndAssertOutput(String input, String... expectedContents) {
+        InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        // Capture output
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        PrintStream out = new PrintStream(outputStream);
-        System.setOut(out);
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(output));
 
-        // Run the main method
-        Main.main(new String[]{});
+        Main.main(new String[]{});  
+        String result = output.toString();
 
-        // Convert captured output to string
-        String output = outputStream.toString();
-
-        // Assertions
-        assertTrue(output.contains("=== Airport CLI ==="));
-        assertTrue(output.contains("Result:"));
-        assertTrue(output.contains("YYT")); // From mock data
+        for (String expected : expectedContents) {
+            assertTrue(result.contains(expected), "Expected output to contain: " + expected);
+        }
     }
 
     @Test
-    public void testMenuOption2DisplaysAircraftResults() {
-        String simulatedInput = "2\nJane Doe\n5\n";
-        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-
-        Main.main(new String[]{});
-        String output = outputStream.toString();
-
-        assertTrue(output.contains("Boeing 737") || output.contains("Airbus A320"));
-        assertTrue(output.contains("C-GJKL") || output.contains("C-ABCD"));
+    public void testMenuOption1DisplaysAirportsByCity() {
+        // 7 = St. John's
+        simulateInputAndAssertOutput("1\n7\n5\n\n", "=== Airport CLI ===", "YYT", "St. John's");
     }
 
     @Test
-    public void testMenuOption3DisplaysAirportPerAircraftResults() {
-        String simulatedInput = "3\nC-GJKL\n5\n";
-        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
+    public void testMenuOption2DisplaysAircraftPerPassenger() {
+        simulateInputAndAssertOutput("2\n1\n5\n\n", "=== Airport CLI ===", "Boeing", "Airbus");
+    }
 
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-
-        Main.main(new String[]{});
-        String output = outputStream.toString();
-
-        assertTrue(output.contains("departures") && output.contains("arrivals"));
-        assertTrue(output.contains("YYT") && output.contains("YUL"));
+    @Test
+    public void testMenuOption3DisplaysAirportsPerAircraft() {
+        simulateInputAndAssertOutput("3\n3\n5\n\n", "=== Airport CLI ===", "YHZ", "YOW");
     }
 
     @Test
     public void testMenuOption4DisplaysAirportsPerPassenger() {
-        String simulatedInput = "4\nJane Doe\n5\n";
-        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-
-        Main.main(new String[]{});
-        String output = outputStream.toString();
-
-        assertTrue(output.contains("Toronto Pearson") || output.contains("St. John's International"));
-        assertTrue(output.contains("YYT") || output.contains("YYZ"));
+        simulateInputAndAssertOutput("4\n1\n5\n\n", "=== Airport CLI ===", "YYZ", "YVR");
     }
 
     @Test
     public void testInvalidOptionThenExit() {
-        String simulatedInput = "99\n5\n";
-        System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-
-        Main.main(new String[]{});
-        String output = outputStream.toString();
-
-        assertTrue(output.contains("Invalid input. Try again."));
-        assertTrue(output.contains("Exiting CLI."));
+        simulateInputAndAssertOutput("99\n5\n\n", "Invalid input", "Exiting CLI");
     }
-
 }
