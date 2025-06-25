@@ -67,7 +67,7 @@ public class ApiService {
             for (City city : cities) {
                 result.append("ID: ").append(city.getId())
                       .append(" | Name: ").append(city.getName())
-                      .append(" | State: ").append(city.getState())
+                      .append(" | Province: ").append(city.getProvince())
                       .append(" | Population: ").append(city.getPopulation())
                       .append("\n");
             }
