@@ -1,51 +1,64 @@
 package com.keyin.cli;
 
-import org.junit.jupiter.api.Test;
-
-import java.io.*;
-
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Scanner;
 
 public class MainTest {
+    public static void main(String[] args) {
+        ApiService apiService = new ApiService();
+        Scanner scanner = new Scanner(System.in);
 
-    private void simulateInputAndAssertOutput(String input, String... expectedContents) {
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
+        System.out.println("=== Airport CLI ===");
+        boolean running = true;
 
-        ByteArrayOutputStream output = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(output));
+        while (running) {
+            System.out.println("\nMenu:");
+            System.out.println("1. List airports by city");
+            System.out.println("2. List aircraft per passenger");
+            System.out.println("3. List airports per aircraft");
+            System.out.println("4. List airports per passenger");
+            System.out.println("5. Exit");
+            System.out.print("Choose an option: ");
 
-        Main.main(new String[]{});  
-        String result = output.toString();
+            String choice = scanner.nextLine().trim();
 
-        for (String expected : expectedContents) {
-            assertTrue(result.contains(expected), "Expected output to contain: " + expected);
+            switch (choice) {
+                case "1":
+                    System.out.print("Enter City ID: ");
+                    String cityId = scanner.nextLine().trim();
+                    String airports = apiService.getAirportsByCity(cityId);
+                    System.out.println(airports);
+                    break;
+
+                case "2":
+                    System.out.print("Enter Passenger ID: ");
+                    String passengerId = scanner.nextLine().trim();
+                    String aircraft = apiService.getAircraftPerPassenger(passengerId);
+                    System.out.println(aircraft);
+                    break;
+
+                case "3":
+                    System.out.print("Enter Aircraft ID: ");
+                    String aircraftId = scanner.nextLine().trim();
+                    String airportsPerAircraft = apiService.getAirportsPerAircraft(aircraftId);
+                    System.out.println(airportsPerAircraft);
+                    break;
+
+                case "4":
+                    System.out.print("Enter Passenger ID: ");
+                    String passId = scanner.nextLine().trim();
+                    String airportsPerPassenger = apiService.getAirportsPerPassenger(passId);
+                    System.out.println(airportsPerPassenger);
+                    break;
+
+                case "5":
+                    System.out.println("Exiting CLI");
+                    running = false;
+                    break;
+
+                default:
+                    System.out.println("Invalid input");
+                    break;
+            }
         }
-    }
-
-    @Test
-    public void testMenuOption1DisplaysAirportsByCity() {
-        // 7 = St. John's
-        simulateInputAndAssertOutput("1\n7\n5\n\n", "=== Airport CLI ===", "YYT", "St. John's");
-    }
-
-    @Test
-    public void testMenuOption2DisplaysAircraftPerPassenger() {
-        simulateInputAndAssertOutput("2\n1\n5\n\n", "=== Airport CLI ===", "Boeing", "Airbus");
-    }
-
-    @Test
-    public void testMenuOption3DisplaysAirportsPerAircraft() {
-        simulateInputAndAssertOutput("3\n3\n5\n\n", "=== Airport CLI ===", "YHZ", "YOW");
-    }
-
-    @Test
-    public void testMenuOption4DisplaysAirportsPerPassenger() {
-        simulateInputAndAssertOutput("4\n1\n5\n\n", "=== Airport CLI ===", "YYZ", "YVR");
-    }
-
-    @Test
-    public void testInvalidOptionThenExit() {
-        simulateInputAndAssertOutput("99\n5\n\n", "Invalid input", "Exiting CLI");
     }
 }

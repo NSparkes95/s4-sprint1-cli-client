@@ -2,6 +2,8 @@ package com.keyin.cli.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Aircraft {
     private Long id;
@@ -10,6 +12,9 @@ public class Aircraft {
     private int numberOfPassengers;
 
     public Aircraft() {}
+
+    public Aircraft(String number, String boeing) {
+    }
 
     public Long getId() {
         return id;
@@ -46,5 +51,12 @@ public class Aircraft {
     @Override
     public String toString() {
         return type + " (" + airlineName + ") with " + numberOfPassengers + " passengers";
+    }
+
+    public void setAirports(List<Airport> yhz) {
+    }
+
+    public Airport[] getAirports() {
+        return new Airport[0];
     }
 }

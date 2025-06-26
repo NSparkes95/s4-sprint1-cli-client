@@ -8,7 +8,23 @@ public class Airport {
     private String name;
     private String code;
 
-    
+    // No-arg constructor for Jackson (required for deserialization)
+    public Airport() {
+    }
+
+    // Custom constructor (you can use this in your mock data setup)
+    public Airport(String id, String code, City city) {
+        // Convert id to Long (if needed) and set fields
+        try {
+            this.id = Long.parseLong(id);
+        } catch (Exception e) {
+            this.id = null; // or 0L if you prefer
+        }
+        this.code = code;
+        this.name = city != null ? city.getName() + " Airport" : code + " Airport";
+        // (If you want more control over the name, feel free to adjust)
+    }
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

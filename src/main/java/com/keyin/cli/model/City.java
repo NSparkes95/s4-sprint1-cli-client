@@ -2,6 +2,8 @@ package com.keyin.cli.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.List;
+
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class City {
@@ -12,6 +14,9 @@ public class City {
 
     
     public City() {
+    }
+
+    public City(String number, String s) {
     }
 
     public long getId() {
@@ -54,5 +59,12 @@ public class City {
                ", state='" + state + '\'' +
                ", population=" + population +
                '}';
+    }
+
+    public void setAirports(List<Airport> yyt) {
+    }
+
+    public Airport[] getAirports() {
+        return new Airport[0];
     }
 }

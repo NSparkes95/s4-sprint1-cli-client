@@ -2,7 +2,7 @@ package com.keyin.cli;
 
 import java.util.Scanner;
 
-public class Main {
+public class  Main {
     private static final ApiService apiService = new ApiService();
 
     public static void main(String[] args) {
