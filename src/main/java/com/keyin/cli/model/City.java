@@ -4,20 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
 
-
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class City {
     private long id;
     private String name;
-    private String state;
+    private String province;
     private int population;
 
-    
-    public City() {
-    }
-
-    public City(String number, String s) {
-    }
+    public City(String number, String s) {}
 
     public long getId() {
         return id;
@@ -35,12 +29,12 @@ public class City {
         this.name = name;
     }
 
-    public String getState() {
-        return state;
+    public String getProvince() {
+        return province;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setProvince(String province) {
+        this.province = province;
     }
 
     public int getPopulation() {
@@ -56,7 +50,7 @@ public class City {
         return "City{" +
                "id=" + id +
                ", name='" + name + '\'' +
-               ", state='" + state + '\'' +
+               ", province='" + province + '\'' +
                ", population=" + population +
                '}';
     }
